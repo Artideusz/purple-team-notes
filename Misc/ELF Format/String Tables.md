@@ -1,0 +1,2 @@
+# String Tables
+A string table is a section that holds null-terminated strings. It is used by sections to represent their section names. The section name of the string table is `.strtab`. The first and the last byte of the string table is a null byte ('\\0' or '0x00'), ensuring null-termination for all strings. The index of the names from the string table is used in the section header field `sh_name`. Labels, constant names, variable names and other data lives here.
