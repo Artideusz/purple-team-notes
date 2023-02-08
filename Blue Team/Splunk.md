@@ -126,7 +126,11 @@ We can also create our own field extractions by using regexes. This is how my pr
 
 ### Field transforms
 
-Field transforms can be configured in "`transforms.conf`" and "`props.conf`". It is a bit more advanced field extraction method compared to inline field extraction, but you are able to use multiple regular expressions for one sourcetype using this method. It is very useful when having one sourcetype with multiple types of log formats.
+Field transformations can be configured in "`transforms.conf`" and "`props.conf`", as well as in the Splunk web GUI. It is a bit more advanced field extraction method compared to inline field extraction, but you are able to use multiple regular expressions for one sourcetype using this method. It is very useful when having one sourcetype with multiple types of log formats or when you have multiple sourcetypes with one log format.
+
+#### Field transforms using GUI
+
+
 
 # TODO
 
