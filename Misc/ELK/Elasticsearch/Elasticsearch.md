@@ -6,7 +6,7 @@ Elasticsearch is a search server an in some sense, a NoSQL database.
 
 ## Indexes
 
-An index is a collection of documents which have a defined mapping of fields.
+An index is a collection of documents which have a defined mapping of fields. 
 
 ## Dynamic mapping
 
@@ -14,19 +14,19 @@ When creating a new index, there is no field mapping provided to the new index, 
 
 If we first create a new index using `PUT example_index`:
 
-![](img/new_index.png)
+![](../img/new_index.png)
 
 We can see that there will be no mapping created for the index:
 
-![](img/new_index_mapping.png)
+![](../img/new_index_mapping.png)
 
 But if we create a new document with custom fields, like this for example:
 
-![](img/new_index_new_doc.png)
+![](../img/new_index_new_doc.png)
 
 We now get a newly generated list of field mappings that are assigned to the field names we provided in the previous document:
 
-![](img/new_index_mod_mapping.png)
+![](../img/new_index_mod_mapping.png)
 
 ## Ingest Pipelines
 
