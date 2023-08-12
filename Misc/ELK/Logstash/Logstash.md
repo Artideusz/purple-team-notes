@@ -69,14 +69,31 @@ There are three types of plugins:
 - Filter plugins
 - Output plugins
 
-Each of the sections (`input`,`filter` and `output`) can have multiple plugins defined inside them, which will be sequentially ran upon data being recieved from a source defined in the `input` section, so in short, consider this configuration:
+Each of the sections (`input`,`filter` and `output`) can have multiple plugins defined inside them, which will be sequentially ran upon data being recieved from a source defined in the `input` section.
+
+## Grok multiple different sources
+
+If you log different types of data using the same input, you can `grok` sequentially until a regex returns successfully using the following syntax:
 
 ```
-TODO
+filter {
+    ...
+    grok {
+        match => {
+            some_field => [
+                "regex1",
+                "regex2",
+                "regex3",
+                ...
+                "regexN"
+            ]
+        }
+    }
+    ...
+}
 ```
-
-
 
 ## Resources
 
 - https://www.elastic.co/guide/en/logstash/current/configuration.html
+- https://stackoverflow.com/questions/31667083/grok-pattern-for-different-types-of-log-in-a-logfile

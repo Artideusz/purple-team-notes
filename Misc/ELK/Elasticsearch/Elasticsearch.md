@@ -43,6 +43,9 @@ Processors are functions that change the original document in some way before it
 
 You can find the whole list [here](https://www.elastic.co/guide/en/elasticsearch/reference/current/processors.html).
 
+## Searching the data
+
+There are many ways of searching data, one of the most detailed ways to search though is by using the `search` API which is documented [here](https://www.elastic.co/guide/en/elasticsearch/reference/current/search.html). 
 
 ## Resources
 
